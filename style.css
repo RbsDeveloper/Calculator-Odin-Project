@@ -1,0 +1,24 @@
+:root {
+
+    --background-color: #232528;
+    --display-color: #009FFD;
+    --keyboard-bg-color: #2A2A72;
+    --buttons-color: #EAF6FF;
+    --important-btn-color: #FFA400;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
