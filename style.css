@@ -1,16 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=VT323&display=swap');
+
 :root {
 
-    --background-color: #232528;
-    --display-color: #009FFD;
-    --keyboard-bg-color: #2A2A72;
-    --buttons-color: #EAF6FF;
-    --important-btn-color: #FFA400;
+    --background-color: #4F772D;
+    --display-color: #132A13;
+    --keyboard-bg-color: #31572C;
+    --buttons-color: #ECF39E;
+    --important-btn-color: #90A955;
+    --font-color: #FFF;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-style: normal;
 }
 
 body{
@@ -19,6 +25,62 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: var(--background-color);
 }
 
+.calc-body {
+    width: 50%;
+    max-width: 500px;
+    
+}
 
+.display-zone {
+    width: auto;
+    height: 125px;
+    background-color: var(--display-color);
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.buttons-zone {
+    background-color: var(--keyboard-bg-color);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5%;
+    border-radius: 10px;
+    
+}
+
+.btn {
+    height: 70px;
+    width: 20%;
+    margin: 2.5%;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--buttons-color);
+    font-size: 28px;
+    color: var(--background-color);
+    border-bottom: 6px solid var(--important-btn-color);
+    border-left: 6px solid var(--important-btn-color);
+    border-right: 6px solid var(--important-btn-color);
+    opacity: 0.8;
+    transition: all 100ms linear;
+}
+
+.btn:hover {
+    opacity: 1;
+}
+
+.btn:active {
+    transform: scale(0.9);
+}
+
+.special {
+    width: 45%;
+}   
+
+.moss-green {
+    background-color: var(--important-btn-color);
+    color: var(--buttons-color);
+    border-color: var(--buttons-color);
+}
