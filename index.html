@@ -8,31 +8,40 @@
     <title>Calculator</title>
 </head>
 <body>
+
+
     
     <div class="calc-body">
-        <div class="display-zone"></div>
-        <div class="buttons-zone">
-            <button class="btn">7</button>
-            <button class="btn">8</button>
-            <button class="btn">9</button>
-            <button class="btn moss-green"><i class="fa-solid fa-delete-left"></i></button>
-            <button class="btn">4</button>
-            <button class="btn">5</button>
-            <button class="btn">6</button>
-            <button class="btn">+</button>
-            <button class="btn">1</button>
-            <button class="btn">2</button>
-            <button class="btn">3</button>
-            <button class="btn">-</button>
-            <button class="btn">.</button>
-            <button class="btn">0</button>
-            <button class="btn">÷</button>
-            <button class="btn">x</button>
-            <button class="btn special moss-green">RESET</button>
-            <button class="btn special moss-green">=</button>
-        </div>
-    </div>
 
+        <div class="calc-header">
+            <h1>{.Calc}</h1>
+        </div>
+        <div class="display-zone">
+            <div class="expression" id="onHold"></div>
+            <div class="result" id="result"></div>
+        </div>
+        <div class="buttons-zone">
+            <button class="btn number" type="button" value="7">7</button>
+            <button class="btn number" type="button" value="8">8</button>
+            <button class="btn number" type="button" value="9">9</button>
+            <button class="btn moss-green" type="button"><i class="fa-solid fa-delete-left"></i></button>
+            <button class="btn number" type="button" value="4">4</button>
+            <button class="btn number" type="button" value="5">5</button>
+            <button class="btn number" type="button" value="6">6</button>
+            <button class="btn operator" type="button" value="+">+</button>
+            <button class="btn number" type="button" value="1">1</button>
+            <button class="btn number" type="button" value="2">2</button>
+            <button class="btn number" type="button" value="3">3</button>
+            <button class="btn operator" type="button" value="-">-</button>
+            <button class="btn" type="button" value=".">.</button>
+            <button class="btn number" type="button" value="0">0</button>
+            <button class="btn operator" type="button" value="/">÷</button>
+            <button class="btn operator" type="button" id="muly" value="*">x</button>
+            <button class="btn special moss-green" type="reset" id="clear">CLEAR</button>
+            <button class="btn special moss-green" type="button" id="doCalcs" value="=">=</button>
+        </div>
+        <div class="calc-footer">Developed by <a href="https://github.com/RbsDeveloper" ><i class="fa-brands fa-github"></i>RbsDeveloper</a></div>
+    </div>
 
     <script src="./script.js"></script>
 </body>
