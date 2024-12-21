@@ -34,7 +34,6 @@ let firstNumber;
 let sign;
 let secondNumber;
 
-
 //Event used to insert inputs to perform calculations
 calcKeys.forEach(key => {
     key.addEventListener('click', ()=>{
@@ -71,14 +70,14 @@ doCalcs.addEventListener('click', ()=>{
     helpCalculation();  
 })
     
-   // Functionality for the clear button
-    clear.addEventListener('click', ()=> {
-        result.innerText = '';
-        onHold.innerText = '';
-        firstNumber = '';
-        secondNumber = '';
-        sign = '';
-    })
+// Functionality for the clear button
+clear.addEventListener('click', ()=> {
+    result.innerText = '';
+    onHold.innerText = '';
+    firstNumber = '';
+    secondNumber = '';
+    sign = '';
+})
 
 
     //Functionality for the delete button
@@ -88,7 +87,8 @@ doCalcs.addEventListener('click', ()=>{
             const newInside = inside.slice(0, inside.length-1).join('');
             onHold.innerText = '';
             result.innerText = newInside;
-            sign='';
+            sign= '';
+            console.log(sign)
             
         }else{
             const inside = result.innerText.split('');
@@ -104,6 +104,7 @@ doCalcs.addEventListener('click', ()=>{
 keyboard.addEventListener("click", ()=> {
     validatePossibleCalc();
     separatorChecker();
+    avoidMultipleOperators();
 })
 
 
@@ -201,3 +202,16 @@ const divide = (a,b)=> {
 function helpRounding(operation) {
     return Math.round((operation) *100) / 100;
 }
+
+//
+function avoidMultipleOperators () {
+    if(sign === undefined || sign === '' || sign !== undefined && result.innerText !== ''){
+        operators.forEach(operator=>operator.disabled=false)
+    }else{
+        operators.forEach(operator=>operator.disabled=true)
+    }
+}
+
+
+
+
