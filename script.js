@@ -88,7 +88,6 @@ clear.addEventListener('click', ()=> {
             onHold.innerText = '';
             result.innerText = newInside;
             sign= '';
-            console.log(sign)
             
         }else{
             const inside = result.innerText.split('');
@@ -212,6 +211,69 @@ function avoidMultipleOperators () {
     }
 }
 
+//CENTRALIZING EVERY BTN OF THE APP TO MAP OVER THEM AT EACH KEYDOWN EVENT INSTEAD OF LOOPING THROUGH ARRAYS.
 
+// Initialize an empty object to map keyboard keys to corresponding calculator buttons
+const keyToButtonsMap = {};
+// Populate the map with number keys (0-9) by associating each key's value with the corresponding button
+calcKeys.forEach(calcKey => {
+    keyToButtonsMap[calcKey.value] = calcKey;
+})
 
+// Add mappings for special keys (operators and actions) by assigning them to specific buttons
+Object.assign(keyToButtonsMap, {
+    '+': document.querySelector('.operator[value="+"]'),
+    '-': document.querySelector('.operator[value="-"]'),
+    '*': document.querySelector('.operator[value="*"]'),
+    '/': document.querySelector('.operator[value="/"]'),
+    Backspace: deleteBtn,
+    Escape: clear,
+    '=': doCalcs,
+    '.': dot
+})
+// Add an event listener for keydown events on the entire document
+document.addEventListener('keydown', (e)=>{
+    // Ignore repeated keydown events to avoid multiple unintended clicks
+    if(e.repeat){
+        return
+    }
+    // If a mapped button exists for the key, simulate a click on the corresponding button
+    const button = keyToButtonsMap[e.key];
+    if(button){
+        button.click();
+    }
 
+    /*
+    OLD LOGIC
+    const key = e.key;
+    if(e.repeat){
+        return
+    }
+    if(key >= 0 && key <= 9){
+        calcKeys.forEach(webKey => {
+            if(key===webKey.value){
+                webKey.click()
+            }
+        })
+    }
+    if(['+','-','*','/'].includes(key)){
+        operators.forEach(operator =>{
+            if(key === operator.value){
+                operator.click()
+            }
+        })
+    }
+    if(key==='Backspace'){
+        deleteBtn.click()
+    }
+    if(key==='Escape'){
+        clear.click()
+    }
+    if(key === '=' || key ==='Enter'){
+        doCalcs.click()
+    }
+    if(key === '.'){
+        dot.click()
+    }
+        */
+})
