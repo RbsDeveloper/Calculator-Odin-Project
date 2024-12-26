@@ -8,7 +8,13 @@ const deleteBtn = document.getElementById('delete');
 const decimalSeparator = document.getElementById('decimalSeparator');
 const keyboard = document.querySelector('.buttons-zone')
 const dot = document.getElementById('dot')
-
+const themeSelector = document.getElementById('theme');
+const historyBtn = document.getElementById('history');
+const hOverlay = document.getElementById('history-cortine');
+const clearHistory = document.getElementById('trash');
+const quitHistoryBtn = document.getElementById('quit');
+const calcList = document.getElementById('history-panel');
+const root = document.documentElement;
 
 /*
 This comment reflects the initial thought process and logic that served as the foundation for this calculator app. 
@@ -127,8 +133,10 @@ function helpCalculation () {
     secondNumber = Number(result.innerText);
 
     if(sign==='/' && secondNumber === 0){
-        //Need to develop a functionality here
-        console.log("nope")
+        onHold.innerText = "";
+        result.innerText = "";
+        let audio = new Audio("fart.mp3");
+        audio.play()
     }else{
         onHold.innerText = "";
         result.innerText = operate(firstNumber, sign, secondNumber);
@@ -158,25 +166,77 @@ function separatorChecker() {
     }
 }
 
+// This array stores the history of all calculations made by the user.
+let calcHistory = [];
+
+// This function creates an object to represent each operation performed by the calculator.
+function Calc(firstN, operator, secondN, result) {
+    this.firstNumber = firstN;
+    this.operator = operator;
+    this.secondNumber = secondN;
+    this.finalR = result;
+}
+
+// Toggles the visibility of the history overlay when the history button is clicked. 
+
+historyBtn.addEventListener('click', ()=> {
+    hOverlay.style.display = "block";
+    updateHistoryDisplay();
+});
+
+quitHistoryBtn.addEventListener('click', ()=> {
+    hOverlay.style.display = "none";
+})
+
+// Clears all stored calculations from the history and updates the display.
+clearHistory.addEventListener('click', ()=> {
+    calcHistory = [];
+    updateHistoryDisplay();
+})
+
+// Updates the history display by adding all calculations from the calcHistory array to the DOM.
+function updateHistoryDisplay() {
+    calcList.innerHTML= '';
+    calcHistory.forEach((operation)=>{
+        const div = document.createElement('div');
+        div.classList.add('operation');
+        div.innerText = `${operation.firstNumber} ${operation.operator} ${operation.secondNumber} = ${operation.finalR}`;
+        calcList.appendChild(div);
+    })
+}
+
+
 // Perform the specified operation 
 function operate (num1, operator, num2) {
+
+
     if(operator==='+'){
+       calcHistory.push(new Calc(num1, operator, num2, add(num1, num2))); 
+       console.log(calcHistory)
        return add(num1, num2);
     }
     if(operator==='-'){
+        calcHistory.push(new Calc(num1, operator, num2, subtract(num1, num2)));
+        console.log(calcHistory)
        return subtract(num1, num2);
     }
     if(operator==='*'){
+        calcHistory.push(new Calc(num1, operator, num2, multiply(num1, num2)));
+        console.log(calcHistory)
        return multiply(num1, num2);
     }
     if(operator==='/'){
         if(num2 !== 0){
+            calcHistory.push(new Calc(num1, operator, num2, divide(num1, num2)));
+            console.log(calcHistory)
             return divide(num1, num2);
         }else{
             return 0
         }
         
     }
+
+    
 }
 
 // Functions for basic calculator operations
@@ -277,3 +337,54 @@ document.addEventListener('keydown', (e)=>{
     }
         */
 })
+
+// These objects define the color variables for each theme, which are applied dynamically in the changeTheme function.
+const greenTheme = {
+    "--background-color":"#4F772D",
+    "--display-color":"#132A13",
+    "--keyboard-bg-color":"#31572C",
+    "--buttons-color":"#ECF39E",
+    "--important-btn-color":"#90A955",
+    "--font-color": "#FFF",
+}
+
+const violetTheme = {
+    "--background-color":"#613DC1", //ok
+    "--display-color":"#2C0735",//ok
+    "--keyboard-bg-color":"#4E148C",//ok
+    "--buttons-color":"#858AE3",
+    "--important-btn-color":"#97DFFC",
+    "--font-color": "#FFF",
+}
+
+const redTheme = {
+    "--background-color":"#FB4B4E",
+    "--display-color":"#3E000C",
+    "--keyboard-bg-color":"#7C0B2B",
+    "--buttons-color":"#FFCBDD",
+    "--important-btn-color":"#D10000",
+    "--font-color": "#FFF",
+}
+
+
+// Updates the root element's CSS variables to apply the selected theme's colors.
+const setRoot = vars => Object.entries(vars).forEach(v => root.style.setProperty(v[0], v[1]));
+
+// Changes the calculator's theme based on the selected option in the theme selector dropdown.
+themeSelector.addEventListener('input', changeTheme)
+
+function changeTheme() {
+    if(themeSelector.value === "1"){
+        setRoot(greenTheme)
+    }else if(themeSelector.value === "2"){
+        setRoot(violetTheme);
+        
+    }else if(themeSelector.value === "3"){
+        setRoot(redTheme);
+    }
+}
+
+
+
+
+

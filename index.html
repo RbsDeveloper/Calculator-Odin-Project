@@ -9,12 +9,20 @@
 </head>
 <body>
 
-`
+
     
     <div class="calc-body">
 
         <div class="calc-header">
             <h1>{.Calc}</h1>
+            <div class="theme-selector-container">
+                <div class="range-steps">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                </div>
+                <input id="theme" type="range" min="1" max="3" step="1" value="1">
+            </div>
         </div>
         <div class="display-zone">
             <div class="expression" id="onHold"></div>
@@ -38,7 +46,19 @@
             <button class="btn operator" type="button" value="/" id="divide">÷</button>
             <button class="btn operator" type="button" id="muly" value="*">x</button>
             <button class="btn special moss-green" type="reset" id="clear">CLEAR</button>
+            <button class="btn special moss-green" type="button" id="history"><i class="fa-solid fa-clock-rotate-left"></i></button>
             <button class="btn special moss-green" type="button" disabled id="doCalcs" value="=">=</button>
+
+            <div class="history-overlay" id="history-cortine">
+                <div class="history-header">
+                    <h2>History</h2>
+                    <div class="history-btn-zone">
+                        <button class="trash-bin" id="trash"><i class="fa-solid fa-trash"></i></button>
+                        <button class="quit" id="quit"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                <div class="calcs-zone" id="history-panel"></div>
+            </div>
         </div>
         <div class="calc-footer">Developed by <a href="https://github.com/RbsDeveloper" ><i class="fa-brands fa-github"></i>RbsDeveloper</a></div>
     </div>
